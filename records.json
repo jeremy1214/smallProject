@@ -1,0 +1,10 @@
+[
+  {
+    "date": "2025-12-30",
+    "type": "支出",
+    "account": "mainAccount",
+    "amount": "10000",
+    "category": "交通",
+    "note": ""
+  }
+]
