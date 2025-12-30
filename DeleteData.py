@@ -2,6 +2,8 @@ import json
 import os
 
 json_path = os.path.join(os.path.dirname(__file__), "records.json")
+cost_record = ["吃飯", "交通", "娛樂", "購物", "其他"]
+earn_record = ["薪水", "獎金", "投資", "其他"]
 
 def load_records():
     if not os.path.exists(json_path):
@@ -22,8 +24,7 @@ def delete_record(index):
     else:
         print("無效的索引，無法刪除記錄。")
 
-delete_number_type = input("請選擇要刪除的紀錄的量(輸入多筆或單筆): ")
-if delete_number_type == "單筆":
+def delete_by_index():
     while True:
         record_index = input("請輸入要刪除的紀錄索引(從0開始): ")
         if(record_index.lower() == "exit"):
@@ -40,3 +41,59 @@ if delete_number_type == "單筆":
             break
         except ValueError:
             print("請輸入有效的整數索引。")
+
+def delete_by_type():
+    while True:
+        type = input("請輸入要刪除的紀錄類型(支出/收入): ")
+        if type not in ["支出", "收入"]:
+            print("不合法的類型。請輸入 '支出' 或 '收入'。")
+            continue
+        if type == "支出":
+            records = input("請輸入要刪除支出類型編號")
+            while True:
+                if(records.lower() == "exit"):
+                    exit()
+                if not records.isdigit():
+                    print("不合法的輸入。請輸入數字。")
+                    records = input("請輸入要刪除支出類型編號")
+                    continue
+                record_index = int(records) - 1
+                if 0 <= record_index < len(cost_record):
+                    type_to_delete = cost_record[record_index]
+                    all_records = load_records()
+                    filtered_records = [r for r in all_records if not (r["type"] == "支出" and r["category"] == type_to_delete)]
+                    save_records(filtered_records)
+                    print(f"已刪除所有支出類型為 '{type_to_delete}' 的記錄。")
+                    break
+                else:
+                    print("選擇無效。請重試。")
+                    records = input("請輸入要刪除支出類型編號")
+            break
+        elif type == "收入":
+            records = input("請輸入要刪除收入類型編號")
+            while True:
+                if(records.lower() == "exit"):
+                    exit()
+                if not records.isdigit():
+                    print("不合法的輸入。請輸入數字。")
+                    records = input("請輸入要刪除收入類型編號")
+                    continue
+                record_index = int(records) - 1
+                if 0 <= record_index < len(earn_record):
+                    type_to_delete = earn_record[record_index]
+                    all_records = load_records()
+                    filtered_records = [r for r in all_records if not (r["type"] == "收入" and r["category"] == type_to_delete)]
+                    save_records(filtered_records)
+                    print(f"已刪除所有收入類型為 '{type_to_delete}' 的記錄。")
+                    break
+                else:
+                    print("選擇無效。請重試。")
+                    records = input("請輸入要刪除收入類型編號")
+    
+
+delete_number_type = input("請選擇要刪除的紀錄的量(輸入多筆或單筆): ")
+
+if delete_number_type == "單筆":
+    delete_by_index()
+elif delete_number_type == "多筆":
+    delete_by_type()
