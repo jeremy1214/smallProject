@@ -19,7 +19,7 @@ while True:
         continue
     break
 
-total_month = [[0]*12]*2
+total_month = [[0]*12, [0]*12]
 total_year = 0
 count_month = 0
 count_year = 0
@@ -56,3 +56,15 @@ for record in records:
         month = int(record["date"].split("-")[1]) - 1
         total_month[1][month] += int(record["amount"])
         total_year += int(record["amount"])
+print(f"{current_year} 年統計累計:", total_year, "元")
+for i in range(12):
+    if show_type == "總計":
+        print(f"{i+1} 月: 支出 {total_month[0][i]} 元, 收入 {total_month[1][i]} 元")
+    elif show_type == "平均":
+        if count_year == 0:
+            avg_cost = total_month[0][i]
+            avg_earn = total_month[1][i]
+        else:
+            avg_cost = total_month[0][i] // count_year
+            avg_earn = total_month[1][i] // count_year
+        print(f"{i+1} 月平均: 支出 {avg_cost} 元, 收入 {avg_earn} 元")
