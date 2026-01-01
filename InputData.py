@@ -4,8 +4,8 @@ import json
 from datetime import date
 
 account_list = []
-cost_record = ["吃飯", "交通", "娛樂", "購物", "其他"]
-earn_record = ["薪水", "獎金", "投資", "其他"]
+cost_record = []
+earn_record = []
 
 json_path = os.path.join(os.path.dirname(__file__), "records.json")
 
@@ -13,6 +13,16 @@ def load_accounts():
     with open("accountList.txt", "r", encoding="utf-8") as f:
         for line in f:
             account_list.append(line.strip())
+
+def load_cost_types():
+    with open("costTypeList.txt", "r", encoding="utf-8") as f:
+        for line in f:
+            cost_record.append(line.strip())
+
+def load_earn_types():
+    with open("earnTypeList.txt", "r", encoding="utf-8") as f:
+        for line in f:
+            earn_record.append(line.strip())
 
 def check_input():
     while True:
@@ -71,6 +81,8 @@ def add_record(date, input_type, account, amount, category, note=""):
 
 # Load existing records
 load_accounts()
+load_cost_types()
+load_earn_types()
 input_type = check_input()
 account = check_account()
 type = ""
