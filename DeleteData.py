@@ -1,19 +1,15 @@
-import json
 import os
+import loadingData
 
 json_path = os.path.join(os.path.dirname(__file__), "records.json")
-cost_record = ["吃飯", "交通", "娛樂", "購物", "其他"]
-earn_record = ["薪水", "獎金", "投資", "其他"]
+cost_record = loadingData.load_cost_types()
+earn_record = loadingData.load_earn_types()
 
 def load_records():
-    if not os.path.exists(json_path):
-        return []
-    with open(json_path, "r", encoding="utf-8") as f:
-        return json.load(f)
+    return loadingData.load_records()
 
 def save_records(records):
-    with open(json_path, "w", encoding="utf-8") as f:
-        json.dump(records, f, ensure_ascii=False, indent=2)
+    loadingData.save_records(records)
 
 def delete_record(index):
     records = load_records()
