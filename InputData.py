@@ -1,14 +1,12 @@
 #import necessary modules
-import os
 from datetime import date
-import loadingData
+import LoadingData
 
-account_list = loadingData.load_accounts()
-cost_record = loadingData.load_cost_types()
-earn_record = loadingData.load_earn_types()
+account_list = LoadingData.load_accounts()
+cost_record = LoadingData.load_cost_types()
+earn_record = LoadingData.load_earn_types()
 type = ""
 
-json_path = os.path.join(os.path.dirname(__file__), "records.json")
 
 def check_input():
     while True:
@@ -98,6 +96,6 @@ if amount == "exit":
 note = input("輸入備註: ")
 if note == "exit":
     exit()
-loadingData.add_record(date.today().isoformat(), input_type, account, amount, type, note)
+LoadingData.add_record(date.today().isoformat(), input_type, account, amount, type, note)
 
 print("記錄已新增。")

@@ -1,15 +1,15 @@
 import os
-import loadingData
+import LoadingData
 
 json_path = os.path.join(os.path.dirname(__file__), "records.json")
-cost_record = loadingData.load_cost_types()
-earn_record = loadingData.load_earn_types()
+cost_record = LoadingData.load_cost_types()
+earn_record = LoadingData.load_earn_types()
 
 def load_records():
-    return loadingData.load_records()
+    return LoadingData.load_records()
 
 def save_records(records):
-    loadingData.save_records(records)
+    LoadingData.save_records(records)
 
 def delete_record(index):
     records = load_records()

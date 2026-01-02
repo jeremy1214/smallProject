@@ -1,14 +1,12 @@
-import json
-import os
+#import necessary modules
 from datetime import datetime
-import loadingData
+import LoadingData
 
-json_path = os.path.join(os.path.dirname(__file__), "records.json")
-cost_record = loadingData.load_cost_types()
-earn_record = loadingData.load_earn_types()
-records = loadingData.load_records()
-account_list = loadingData.load_accounts()
-    
+cost_record = LoadingData.load_cost_types()
+earn_record = LoadingData.load_earn_types()
+records = LoadingData.load_records()
+account_list = LoadingData.load_accounts()
+
 def check_account():
     while True:
         account = input("輸入帳戶名稱: ")
@@ -84,33 +82,26 @@ print("歡迎使用記帳顯示系統！")
 show_type = ""
 account = check_account()
 while True:
-    show_type = input("請選擇要顯示的紀錄類型(總計或平均): ")
-    if show_type not in ["總計", "平均"]:
-        print("不合法的類型。請輸入 '總計' 或 '平均'。")
+    time_type = input("請選擇要顯示的時間範圍(日、月、年): ")
+    if time_type not in ["日", "月", "年"]:
+        print("不合法的時間範圍。請輸入 '日'、'月' 或 '年'。")
         continue
     break
-if show_type == "總計":
-    while True:
-        time_type = input("請選擇要顯示的時間範圍(日、月、年): ")
-        if time_type not in ["日", "月", "年"]:
-            print("不合法的時間範圍。請輸入 '日'、'月' 或 '年'。")
-            continue
-        break
-    if time_type == "日":
-        year = int(input("請輸入年份(YYYY): "))
-        month = int(input("請輸入月份(MM): "))
-        day = int(input("請輸入日期(DD): "))
-        total = show_day_total(account, year, month, day)
-        print(f"{year}年{month}月{day}日 總收入: {total['total_earn']} 總支出: {total['total_cost']}")
-    elif time_type == "月":
-        year = int(input("請輸入年份(YYYY): "))
-        month = int(input("請輸入月份(MM): "))
-        total = show_month_total(account, year, month)
-        print(f"{year}年{month}月 總收入: {total['total_earn']} 總支出: {total['total_cost']}")
-    elif time_type == "年":
-        year = int(input("請輸入年份(YYYY): "))
-        total = show_year_total(account, year)
-        print(f"{year}年 總收入: {total['total_earn']} 總支出: {total['total_cost']}")
+if time_type == "日":
+    year = int(input("請輸入年份(YYYY): "))
+    month = int(input("請輸入月份(MM): "))
+    day = int(input("請輸入日期(DD): "))
+    total = show_day_total(account, year, month, day)
+    print(f"{year}年{month}月{day}日 總收入: {total['total_earn']} 總支出: {total['total_cost']}")
+elif time_type == "月":
+    year = int(input("請輸入年份(YYYY): "))
+    month = int(input("請輸入月份(MM): "))
+    total = show_month_total(account, year, month)
+    print(f"{year}年{month}月 總收入: {total['total_earn']} 總支出: {total['total_cost']}")
+elif time_type == "年":
+    year = int(input("請輸入年份(YYYY): "))
+    total = show_year_total(account, year)
+    print(f"{year}年 總收入: {total['total_earn']} 總支出: {total['total_cost']}")
 
 
 
