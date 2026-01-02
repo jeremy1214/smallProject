@@ -14,5 +14,13 @@
     "amount": "1000",
     "category": "購物",
     "note": "hi"
+  },
+  {
+    "date": "2026-01-03",
+    "type": "支出",
+    "account": "cash",
+    "amount": "100555",
+    "category": "",
+    "note": "date"
   }
 ]

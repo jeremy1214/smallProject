@@ -6,6 +6,7 @@ from datetime import date
 account_list = []
 cost_record = []
 earn_record = []
+type = ""
 
 json_path = os.path.join(os.path.dirname(__file__), "records.json")
 
@@ -79,15 +80,7 @@ def add_record(date, input_type, account, amount, category, note=""):
     })
     save_records(records)
 
-# Load existing records
-load_accounts()
-load_cost_types()
-load_earn_types()
-input_type = check_input()
-account = check_account()
-type = ""
-
-if input_type == "支出":
+def add_cost_record():
     while True:
         print("支出類型: ")
         i = 1
@@ -106,7 +99,8 @@ if input_type == "支出":
             break
         else:
             print("選擇無效。請重試。")
-elif input_type == "收入":
+
+def add_earn_record():
     while True:
         print("收入類型: ")
         i = 1
@@ -125,6 +119,19 @@ elif input_type == "收入":
             break
         else:
             print("選擇無效。請重試。")
+
+# Load existing records
+load_accounts()
+load_cost_types()
+load_earn_types()
+input_type = check_input()
+account = check_account()
+
+
+if input_type == "支出":
+    add_cost_record()
+elif input_type == "收入":
+    add_earn_record()
 
 amount = input("輸入金額: ")
 if amount == "exit":
