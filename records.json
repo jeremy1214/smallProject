@@ -22,5 +22,13 @@
     "amount": "100555",
     "category": "",
     "note": "date"
+  },
+  {
+    "date": "2026-01-03",
+    "type": "收入",
+    "account": "cash",
+    "amount": "5000",
+    "category": "",
+    "note": ""
   }
 ]

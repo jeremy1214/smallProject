@@ -1,23 +1,13 @@
 import json
 import os
 from datetime import datetime
+import loadingData
 
 json_path = os.path.join(os.path.dirname(__file__), "records.json")
-cost_record = ["吃飯", "交通", "娛樂", "購物", "其他"]
-earn_record = ["薪水", "獎金", "投資", "其他"]
-records = []
-account_list = []
-
-def load_accounts():
-    with open("accountList.txt", "r", encoding="utf-8") as f:
-        for line in f:
-            account_list.append(line.strip())
-
-def load_records():
-    if not os.path.exists(json_path):
-        return []
-    with open(json_path, "r", encoding="utf-8") as f:
-        return json.load(f)
+cost_record = loadingData.load_cost_types()
+earn_record = loadingData.load_earn_types()
+records = loadingData.load_records()
+account_list = loadingData.load_accounts()
     
 def check_account():
     while True:
@@ -90,10 +80,9 @@ def show_year_total(account: str, year: int):
                 year_total["total_earn"] += int(record["amount"])
     return year_total
 
-load_accounts()
+print("歡迎使用記帳顯示系統！")
 show_type = ""
 account = check_account()
-records = load_records()
 while True:
     show_type = input("請選擇要顯示的紀錄類型(總計或平均): ")
     if show_type not in ["總計", "平均"]:

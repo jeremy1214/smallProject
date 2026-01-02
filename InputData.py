@@ -1,29 +1,14 @@
 #import necessary modules
 import os
-import json
 from datetime import date
+import loadingData
 
-account_list = []
-cost_record = []
-earn_record = []
+account_list = loadingData.load_accounts()
+cost_record = loadingData.load_cost_types()
+earn_record = loadingData.load_earn_types()
 type = ""
 
 json_path = os.path.join(os.path.dirname(__file__), "records.json")
-
-def load_accounts():
-    with open("accountList.txt", "r", encoding="utf-8") as f:
-        for line in f:
-            account_list.append(line.strip())
-
-def load_cost_types():
-    with open("costTypeList.txt", "r", encoding="utf-8") as f:
-        for line in f:
-            cost_record.append(line.strip())
-
-def load_earn_types():
-    with open("earnTypeList.txt", "r", encoding="utf-8") as f:
-        for line in f:
-            earn_record.append(line.strip())
 
 def check_input():
     while True:
@@ -57,28 +42,6 @@ def check_account():
         else:
             break
     return account
-
-def load_records():
-    if not os.path.exists(json_path):
-        return []
-    with open(json_path, "r", encoding="utf-8") as f:
-        return json.load(f)
-
-def save_records(records):
-    with open(json_path, "w", encoding="utf-8") as f:
-        json.dump(records, f, ensure_ascii=False, indent=2)
-
-def add_record(date, input_type, account, amount, category, note=""):
-    records = load_records()
-    records.append({
-        "date": date,
-        "type": input_type,
-        "account": account,
-        "amount": amount,
-        "category": category,
-        "note": note
-    })
-    save_records(records)
 
 def add_cost_record():
     while True:
@@ -121,12 +84,8 @@ def add_earn_record():
             print("選擇無效。請重試。")
 
 # Load existing records
-load_accounts()
-load_cost_types()
-load_earn_types()
 input_type = check_input()
 account = check_account()
-
 
 if input_type == "支出":
     add_cost_record()
@@ -139,6 +98,6 @@ if amount == "exit":
 note = input("輸入備註: ")
 if note == "exit":
     exit()
-add_record(date.today().isoformat(), input_type, account, amount, type, note)
+loadingData.add_record(date.today().isoformat(), input_type, account, amount, type, note)
 
 print("記錄已新增。")
