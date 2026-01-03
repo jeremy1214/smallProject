@@ -2,12 +2,9 @@
 from datetime import datetime
 import utils.LoadingData as LoadingData
 
-cost_record = LoadingData.load_cost_types()
-earn_record = LoadingData.load_earn_types()
-records = LoadingData.load_records()
-account_list = LoadingData.load_accounts()
 
 def check_account():
+    account_list = LoadingData.load_accounts()
     while True:
         account = input("輸入帳戶名稱: ")
         if account == "exit":
@@ -31,6 +28,7 @@ def check_account():
     return account
 
 def show_day_total(account: str, year: int, month: int, day: int):
+    records = LoadingData.load_records()
     day_total = {"total_earn": 0, "total_cost": 0}
     for record in records:
         if record["account"] != account:
@@ -48,6 +46,7 @@ def show_day_total(account: str, year: int, month: int, day: int):
     return day_total
 
 def show_month_total(account: str, year: int, month: int):
+    records = LoadingData.load_records()
     month_total = {"total_earn": 0, "total_cost": 0}
     for record in records:
         if record["account"] != account:
@@ -64,6 +63,7 @@ def show_month_total(account: str, year: int, month: int):
     return month_total
 
 def show_year_total(account: str, year: int):
+    records = LoadingData.load_records()
     year_total = {"total_earn": 0, "total_cost": 0}
     for record in records:
         if record["account"] != account:
@@ -81,7 +81,6 @@ def show_year_total(account: str, year: int):
 
 def show_data():
     print("歡迎使用記帳顯示系統！")
-    show_type = ""
     account = check_account()
     while True:
         time_type = input("請選擇要顯示的時間範圍(日、月、年): ")
@@ -105,8 +104,6 @@ def show_data():
         total = show_year_total(account, year)
         print(f"{year}年 總收入: {total['total_earn']} 總支出: {total['total_cost']}")
 
-if __name__ == "__main__":
-    show_data()
 
 
 

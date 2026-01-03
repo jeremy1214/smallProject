@@ -11,32 +11,22 @@ ACCOUNT_LIST_PATH = DATA_DIR / "accountList.txt"
 COST_RECORD_PATH = DATA_DIR / "costTypeList.txt"
 EARN_RECORD_PATH = DATA_DIR / "earnTypeList.txt"
 
-account_list = []
-cost_record = []
-earn_record = []
-
 def load_accounts():
-    if not os.path.exists(ACCOUNT_LIST_PATH):
-        print("帳戶列表檔案不存在，返回error。")
-        exit()
+    account_list = []
     with open(ACCOUNT_LIST_PATH, "r", encoding="utf-8") as f:
         for line in f:
             account_list.append(line.strip())
     return account_list
 
 def load_cost_types():
-    if not os.path.exists(COST_RECORD_PATH):
-        print("支出類型列表檔案不存在，返回error。")
-        exit()
+    cost_record = []
     with open(COST_RECORD_PATH, "r", encoding="utf-8") as f:
         for line in f:
             cost_record.append(line.strip())
     return cost_record
 
 def load_earn_types():
-    if not os.path.exists(EARN_RECORD_PATH):
-        print("收入類型列表檔案不存在，返回error。")
-        exit()
+    earn_record = []
     with open(EARN_RECORD_PATH, "r", encoding="utf-8") as f:
         for line in f:
             earn_record.append(line.strip())

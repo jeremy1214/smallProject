@@ -2,11 +2,7 @@
 from datetime import date
 import utils.LoadingData as LoadingData
 
-account_list = LoadingData.load_accounts()
-cost_record = LoadingData.load_cost_types()
-earn_record = LoadingData.load_earn_types()
 type = ""
-
 
 def check_input():
     while True:
@@ -19,6 +15,7 @@ def check_input():
             print("不合法的輸入。請輸入 '支出' 或 '收入'。")
 
 def check_account():
+    account_list = LoadingData.load_accounts()
     while True:
         account = input("輸入帳戶名稱: ")
         if account == "exit":
@@ -42,6 +39,7 @@ def check_account():
     return account
 
 def add_cost_record():
+    cost_record = LoadingData.load_cost_types()
     while True:
         print("支出類型: ")
         i = 1
@@ -56,12 +54,14 @@ def add_cost_record():
             continue
         type_index = int(type_index) - 1
         if 0 <= type_index < len(cost_record):
+            global type
             type = cost_record[type_index]
             break
         else:
             print("選擇無效。請重試。")
 
 def add_earn_record():
+    earn_record = LoadingData.load_earn_types()
     while True:
         print("收入類型: ")
         i = 1
@@ -76,12 +76,13 @@ def add_earn_record():
             continue
         type_index = int(type_index) - 1
         if 0 <= type_index < len(earn_record):
+            global type
             type = earn_record[type_index]
             break
         else:
             print("選擇無效。請重試。")
 
-def input_record():
+def input_data():
     # Load existing records
     input_type = check_input()
     account = check_account()
@@ -100,6 +101,3 @@ def input_record():
     LoadingData.add_record(date.today().isoformat(), input_type, account, amount, type, note)
 
     print("記錄已新增。")
-
-if __name__ == "__main__":
-    input_record()
