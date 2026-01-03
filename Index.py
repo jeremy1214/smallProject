@@ -1,3 +1,23 @@
 from core import InputData, DeleteData, ShowData
 
-InputData.input_record()
+while True:
+    print("歡迎使用記帳系統！")
+    print("請選擇操作:")
+    print("1. 輸入記錄")
+    print("2. 刪除記錄")
+    print("3. 顯示記錄")
+    print("4. 退出系統")
+
+    choice = input("輸入選項編號 (1-4): ")
+
+    if choice == "1":
+        InputData.input_data()
+    elif choice == "2":
+        DeleteData.delete_data()
+    elif choice == "3":
+        ShowData.show_data()
+    elif choice == "4":
+        print("感謝使用，再見！")
+        break
+    else:
+        print("無效的選項，請重試。")
