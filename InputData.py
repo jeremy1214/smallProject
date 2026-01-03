@@ -81,21 +81,25 @@ def add_earn_record():
         else:
             print("選擇無效。請重試。")
 
-# Load existing records
-input_type = check_input()
-account = check_account()
+def input_record():
+    # Load existing records
+    input_type = check_input()
+    account = check_account()
 
-if input_type == "支出":
-    add_cost_record()
-elif input_type == "收入":
-    add_earn_record()
+    if input_type == "支出":
+        add_cost_record()
+    elif input_type == "收入":
+        add_earn_record()
 
-amount = input("輸入金額: ")
-if amount == "exit":
-    exit()
-note = input("輸入備註: ")
-if note == "exit":
-    exit()
-LoadingData.add_record(date.today().isoformat(), input_type, account, amount, type, note)
+    amount = input("輸入金額: ")
+    if amount == "exit":
+        exit()
+    note = input("輸入備註: ")
+    if note == "exit":
+        exit()
+    LoadingData.add_record(date.today().isoformat(), input_type, account, amount, type, note)
 
-print("記錄已新增。")
+    print("記錄已新增。")
+
+if __name__ == "__main__":
+    input_record()

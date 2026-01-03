@@ -86,10 +86,13 @@ def delete_by_type():
                     print("選擇無效。請重試。")
                     records = input("請輸入要刪除收入類型編號")
     
+def delete_data():
+    delete_number_type = input("請選擇要刪除的紀錄的量(輸入多筆或單筆): ")
 
-delete_number_type = input("請選擇要刪除的紀錄的量(輸入多筆或單筆): ")
+    if delete_number_type == "單筆":
+        delete_by_index()
+    elif delete_number_type == "多筆":
+        delete_by_type()
 
-if delete_number_type == "單筆":
-    delete_by_index()
-elif delete_number_type == "多筆":
-    delete_by_type()
+if __name__ == "__main__":
+    delete_data()
