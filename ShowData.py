@@ -1,6 +1,6 @@
 #import necessary modules
 from datetime import datetime
-import LoadingData
+import utils.LoadingData as LoadingData
 
 cost_record = LoadingData.load_cost_types()
 earn_record = LoadingData.load_earn_types()

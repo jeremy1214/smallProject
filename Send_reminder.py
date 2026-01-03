@@ -1,5 +1,5 @@
 import ctypes
-import LoadingData
+import utils.LoadingData as LoadingData
 from datetime import date
 
 def send_reminder():

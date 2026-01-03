@@ -1,5 +1,5 @@
 import os
-import LoadingData
+import utils.LoadingData as LoadingData
 
 json_path = os.path.join(os.path.dirname(__file__), "records.json")
 cost_record = LoadingData.load_cost_types()

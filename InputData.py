@@ -1,6 +1,6 @@
 #import necessary modules
 from datetime import date
-import LoadingData
+import utils.LoadingData as LoadingData
 
 account_list = LoadingData.load_accounts()
 cost_record = LoadingData.load_cost_types()
