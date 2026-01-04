@@ -1,4 +1,5 @@
 import utils.LoadingData as LoadingData
+import utils.InputingData as InputingData
 
 
 def load_records():
@@ -19,14 +20,8 @@ def delete_record(index):
 def delete_by_index():
     while True:
         record_index = input("請輸入要刪除的紀錄索引(從0開始): ")
-        if(record_index.lower() == "exit"):
-            exit()
-        if(record_index.lower() == "list"):
-            records = load_records()
-            print("目前的紀錄列表:")
-            for i, record in enumerate(records):
-                print(f"{i}: {record}")
-            continue
+        InputingData.exit_command(record_index)
+        InputingData.list_command(record_index, load_records(), "記錄")
         try:
             record_index = int(record_index)
             delete_record(record_index)
@@ -37,64 +32,29 @@ def delete_by_index():
 def delete_by_type():
     cost_record = LoadingData.load_cost_types()
     earn_record = LoadingData.load_earn_types()
-    while True:
-        type = input("請輸入要刪除的紀錄類型(支出/收入): ")
-        if type.lower() == "exit":
-            exit()
-        if type not in ["支出", "收入"]:
-            print("不合法的類型。請輸入 '支出' 或 '收入'。")
-            continue
-        if type == "支出":
-            while True:
-                records = input("請輸入要刪除支出類型編號: ")
-                if records.lower() == "exit":
-                    exit()
-                if records.lower() == "list":
-                    print("支出類型列表:")
-                    for i, record in enumerate(cost_record):
-                        print(f"{i + 1}: {record}")
-                    continue
-                if not records.isdigit():
-                    print("不合法的輸入。請輸入數字。")
-                    continue
-                record_index = int(records) - 1
-                if 0 <= record_index < len(cost_record):
-                    type_to_delete = cost_record[record_index]
-                    all_records = load_records()
-                    filtered_records = [r for r in all_records if not (r["type"] == "支出" and r["category"] == type_to_delete)]
-                    save_records(filtered_records)
-                    print(f"已刪除所有支出類型為 '{type_to_delete}' 的記錄。")
-                    break
-                else:
-                    print("選擇無效。請重試。")
-            break
-        elif type == "收入":
-            while True:
-                records = input("請輸入要刪除收入類型編號")
-                if(records.lower() == "exit"):
-                    exit()
-                if records.lower() == "list":
-                    print("收入類型列表:")
-                    for i, record in enumerate(earn_record):
-                        print(f"{i + 1}: {record}")
-                    continue
-                if not records.isdigit():
-                    print("不合法的輸入。請輸入數字。")
-                    continue
-                record_index = int(records) - 1
-                if 0 <= record_index < len(earn_record):
-                    type_to_delete = earn_record[record_index]
-                    all_records = load_records()
-                    filtered_records = [r for r in all_records if not (r["type"] == "收入" and r["category"] == type_to_delete)]
-                    save_records(filtered_records)
-                    print(f"已刪除所有收入類型為 '{type_to_delete}' 的記錄。")
-                    break
-                else:
-                    print("選擇無效。請重試。")
-            break
+    type = InputingData.input_record_type()
+
+    if type == "支出":
+        type_to_delete = InputingData.input_cost_type(cost_record)
+        all_records = load_records()
+        filtered_records = [r for r in all_records if not (r["type"] == "支出" and r["category"] == type_to_delete)]
+        save_records(filtered_records)
+        print(f"已刪除所有支出類型為 '{type_to_delete}' 的記錄。")
+    elif type == "收入":
+        type_to_delete = InputingData.input_earn_type(earn_record)
+        all_records = load_records()
+        filtered_records = [r for r in all_records if not (r["type"] == "收入" and r["category"] == type_to_delete)]
+        save_records(filtered_records)
+        print(f"已刪除所有收入類型為 '{type_to_delete}' 的記錄。")
     
 def delete_data():
-    delete_number_type = input("請選擇要刪除的紀錄的量(輸入多筆或單筆): ")
+    while True:
+        delete_number_type = input("請選擇要刪除的紀錄的量(輸入多筆或單筆): ")
+        InputingData.exit_command(delete_number_type)
+        if delete_number_type not in ["單筆", "多筆"]:
+            print("不合法的輸入，請輸入 '單筆' 或 '多筆'。")
+            continue
+        break
     if delete_number_type == "單筆":
         delete_by_index()
     elif delete_number_type == "多筆":

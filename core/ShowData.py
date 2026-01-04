@@ -1,31 +1,12 @@
 #import necessary modules
 from datetime import datetime
 import utils.LoadingData as LoadingData
+import utils.InputingData as InputingData
 
 
 def check_account():
     account_list = LoadingData.load_accounts()
-    while True:
-        account = input("輸入帳戶名稱: ")
-        if account == "exit":
-            exit()
-        if account == "list":
-            print("帳戶列表:")
-            i = 1
-            for record in account_list:
-                print(i, record)
-                i += 1
-            continue
-        is_available = False
-        for record in account_list:
-            if record == account:
-                is_available = True
-                break
-        if not is_available:
-            print("帳戶不存在。請檢查帳戶名稱並重試。")
-        else:
-            break
-    return account
+    return InputingData.input_account(account_list)
 
 def show_day_total(account: str, year: int, month: int, day: int):
     records = LoadingData.load_records()
@@ -82,12 +63,7 @@ def show_year_total(account: str, year: int):
 def show_data():
     print("歡迎使用記帳顯示系統！")
     account = check_account()
-    while True:
-        time_type = input("請選擇要顯示的時間範圍(日、月、年): ")
-        if time_type not in ["日", "月", "年"]:
-            print("不合法的時間範圍。請輸入 '日'、'月' 或 '年'。")
-            continue
-        break
+    time_type = InputingData.input_date()
     if time_type == "日":
         year = int(input("請輸入年份(YYYY): "))
         month = int(input("請輸入月份(MM): "))
