@@ -9,13 +9,14 @@ def list_command(user_input, items, item_name):
             print(f"{i + 1}: {item}")
 
 def input_record_type():
-    tmp = ""
-    while tmp not in ["支出", "收入"]:
+    while True:
         print("不合法的類型。請輸入 '支出' 或 '收入'。")
         tmp = input("請輸入記錄類型(支出/收入): ")
         exit_command(tmp)
-    return tmp
-
+        if tmp not in ["支出", "收入"]:
+            print("不合法的類型。請輸入 '支出' 或 '收入'。")
+            continue
+        return tmp
 def input_account(account_list):
     print("可用帳戶列表:")
     for i, account in enumerate(account_list):
