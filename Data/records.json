@@ -14,5 +14,13 @@
     "amount": "100",
     "category": "交通",
     "note": ""
+  },
+  {
+    "date": "2026-01-05",
+    "type": "支出",
+    "account": "cash",
+    "amount": 1000.0,
+    "category": "交通",
+    "note": ""
   }
 ]

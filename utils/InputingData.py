@@ -10,7 +10,6 @@ def list_command(user_input, items, item_name):
 
 def input_record_type():
     while True:
-        print("不合法的類型。請輸入 '支出' 或 '收入'。")
         tmp = input("請輸入記錄類型(支出/收入): ")
         exit_command(tmp)
         if tmp not in ["支出", "收入"]:
