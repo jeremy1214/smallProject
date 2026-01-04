@@ -21,11 +21,11 @@ def delete_record(index):
 
 def delete_by_index():
     while True:
-        record_index = input("請輸入要刪除的紀錄索引(從0開始): ")
+        record_index = input("請輸入要刪除的紀錄索引(從1開始): ")
         InputingData.exit_command(record_index)
         InputingData.list_command(record_index, load_records(), "記錄")
         try:
-            record_index = int(record_index)
+            record_index = int(record_index)-1
             delete_record(record_index)
             break
         except ValueError:
