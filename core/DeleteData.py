@@ -14,8 +14,10 @@ def delete_record(index):
         del records[index]
         save_records(records)
         print(f"已刪除索引 {index} 的記錄。")
+        return True
     else:
         print("無效的索引，無法刪除記錄。")
+        return False
 
 def delete_by_index():
     while True:
