@@ -11,7 +11,7 @@ def send_reminder():
     )
 
 def send():
-    records = LoadingData.load_records()
+    records = LoadingData.load_json()
     today_str = date.today().isoformat()
     has_record_today = any(record["date"] == today_str for record in records)
     if not has_record_today:

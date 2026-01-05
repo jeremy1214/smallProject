@@ -1,4 +1,4 @@
-from core import Send_reminder
+from core import SendReminder
 
 if __name__ == "__main__":
-    Send_reminder.send()
+    SendReminder.send()

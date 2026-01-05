@@ -3,10 +3,10 @@ import utils.InputingData as InputingData
 
 
 def load_records():
-    return LoadingData.load_records()
+    return LoadingData.load_json()
 
 def save_records(records):
-    LoadingData.save_records(records)
+    LoadingData.save_json(records)
 
 def delete_record(index):
     records = load_records()

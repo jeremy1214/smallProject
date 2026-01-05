@@ -107,3 +107,15 @@ def input_delete_type():
             continue
         return type_input
     
+def input_account_name(account_list):
+    while True:
+        account_name = input("請輸入帳戶名稱: ")
+        exit_command(account_name)
+        if not account_name.strip():
+            print("帳戶名稱不能為空，請重試。")
+            continue
+        if account_name in account_list:
+            print("該帳戶已存在，請輸入其他名稱。")
+            continue
+        return account_name.strip()
+    

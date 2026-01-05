@@ -9,7 +9,7 @@ def check_account():
     return InputingData.input_account(account_list)
 
 def show_day_total(account: str, year: int, month: int, day: int):
-    records = LoadingData.load_records()
+    records = LoadingData.load_json()
     day_total = {"total_earn": 0, "total_cost": 0}
     for record in records:
         if record["account"] != account:
@@ -27,7 +27,7 @@ def show_day_total(account: str, year: int, month: int, day: int):
     return day_total
 
 def show_month_total(account: str, year: int, month: int):
-    records = LoadingData.load_records()
+    records = LoadingData.load_json()
     month_total = {"total_earn": 0, "total_cost": 0}
     for record in records:
         if record["account"] != account:
@@ -44,7 +44,7 @@ def show_month_total(account: str, year: int, month: int):
     return month_total
 
 def show_year_total(account: str, year: int):
-    records = LoadingData.load_records()
+    records = LoadingData.load_json()
     year_total = {"total_earn": 0, "total_cost": 0}
     for record in records:
         if record["account"] != account:
