@@ -119,3 +119,22 @@ def input_account_name(account_list):
             continue
         return account_name.strip()
     
+def input_account_type():
+    while True:
+        account_type = input("請輸入帳戶類型(現金/銀行/電子錢包/信用卡): ")
+        exit_command(account_type)
+        if account_type not in ["現金", "銀行", "電子錢包", "信用卡"]:
+            print("不合法的帳戶類型。請輸入 '現金'、'銀行'、'電子錢包' 或 '信用卡'。")
+            continue
+        return account_type
+    
+def input_balance():
+    while True:
+        balance_input = input("請輸入初始餘額: ")
+        exit_command(balance_input)
+        try:
+            balance = float(balance_input)
+            return balance
+        except ValueError:
+            print("不合法的餘額，請輸入數字。")
+    
