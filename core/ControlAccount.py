@@ -40,24 +40,11 @@ elif action == "3":
     print("現有帳戶列表:")
     for account in account_list:
         print(f"名稱: {account['name']}, 類型: {account['type']}, 餘額: {account['balance']}")
-# elif action == "4":
-    # print("選擇轉出帳戶: ")
-    # from_account = InputingData.input_account(account_name_list)
-    # print("選擇轉入帳戶: ")
-    # while True:
-    #     to_account = InputingData.input_account(account_name_list)
-    #     if to_account == from_account:
-    #         print("轉入帳戶不能與轉出帳戶相同，請重新選擇。")
-    #         continue
-    #     break
-    # amount = InputingData.input_transfer_amount()
-    # for account in account_list:
-    #     if account["name"] == from_account:
-    #         if account["balance"] < amount:
-    #             print("餘額不足，無法完成轉帳。")
-    #             exit()
-    #         account["balance"] -= amount
-    #     elif account["name"] == to_account:
-    #         account["balance"] += amount
-    # LoadingData.save_json(account_list, LoadingData.ACCOUNT_LIST_PATH)
-    # print(f"已從 '{from_account}' 轉帳 {amount} 至 '{to_account}'。")
+elif action == "4":
+    print("選擇轉出帳戶: ")
+    from_account = InputingData.input_account(account_name_list)
+    print("選擇轉入帳戶: ")
+    to_account = InputingData.input_account(account_name_list, exclude=from_account)
+    amout = InputingData.input_amount()
+    LoadingData.transfer_between_accounts(from_account, to_account, amout)
+    print(f"已從 '{from_account}' 轉帳 {amout} 到 '{to_account}'。")

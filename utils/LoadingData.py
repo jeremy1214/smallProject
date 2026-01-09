@@ -65,3 +65,12 @@ def add_account(account_name, type, balance=0):
         }
     )
     save_json(account_list, ACCOUNT_LIST_PATH)
+
+def transfer_between_accounts(from_account, to_account, amount):
+    account_list = load_json(ACCOUNT_LIST_PATH)
+    for account in account_list:
+        if account["name"] == from_account:
+            account["balance"] -= amount
+        elif account["name"] == to_account:
+            account["balance"] += amount
+    save_json(account_list, ACCOUNT_LIST_PATH)
